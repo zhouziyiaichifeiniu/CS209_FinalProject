@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en " xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select information</title>
+</head>
+<!-- 新 Bootstrap5 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+<body th:style="'background-image: url(/img/3.svg)'">
+<style type="text/css">
+    body {
+        background-size: 100%, 100%;
+    }
+
+    #h1 {
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+        font-weight: bold;
+        border: 1px;
+        background-color: #c6ffee;
+        opacity: 80%;
+    }
+
+    #dev {
+        text-align: center;
+
+    }
+
+    #rel {
+        text-align: center;
+
+    }
+
+    #iss {
+        text-align: center;
+
+    }
+    #comm {
+        text-align: center;
+
+    }
+</style>
+<div id="h1">
+    <h1>Choose the topic you want</h1>
+</div><br>
+<br>
+<br>
+
+
+<form id="dev" th:action="@{/select}" method="post">
+    <div>
+        <input type="submit" name="developer" value="developer" class="btn btn-primary">
+    </div>
+    <br>
+    <div><h4>Information about developers in the repository.</h4></div>
+</form>
+<br>
+
+
+<br>
+
+<form id="rel" th:action="@{/select}" method="post">
+    <div>
+        <input type="submit" name="release" value="release" class="btn btn-primary">
+    </div>
+    <br><div><h4>Analysis of releases and commits.</h4></div>
+</form>
+<br>
+<br>
+
+
+<form id="iss" th:action="@{/select}" method="post">
+    <div>
+        <input type="submit" name="issue" value="issue" class="btn btn-primary">
+
+    </div>
+<br>
+    <div><h4>Let's check the issues!</h4></div>
+</form>
+<br>
+<br>
+
+
+<!--<form id="comm" th:action="@{/select}" method="post">-->
+<!--    <div>-->
+<!--        <input type="submit" name="commit" value="commit" class="btn btn-primary">-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div><h4>Check all commits.</h4></div>-->
+<!--</form>-->
+</body>
+</html>

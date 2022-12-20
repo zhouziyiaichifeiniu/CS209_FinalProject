@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Developer!</title>
+</head>
+<!-- 新 Bootstrap5 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+<body th:style="'background-image: url(/img/4.svg)'">
+<style>
+    #h1 {
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+        font-weight: bold;
+        border: 1px;
+
+        opacity: 80%;
+    }
+
+    body {
+        background-size: 100%, 100%;
+    }
+    #main{
+        text-align: center;
+        width: 600px;
+        height: 400px;
+        position: absolute;
+        right: 500px;
+        bottom: 200px;
+        z-index: 9999;
+    }
+</style>
+<div id="h1"><h1>Developer</h1>
+    <form th:action="@{/developer}" method="post">
+        <div>
+            <input type="submit" name="back" value="back" class="btn btn-danger">
+            <input type="submit" name="apollo" value="apollo" class="btn btn-info">
+            <input type="submit" name="httpie" value="httpie" class="btn btn-info">
+        </div>
+    </form>
+</div><br><br>
+<div id="main"></div>
+<script type="text/javascript" th:inline="javascript">
+
+    var obj;
+    var obj2;
+
+    var myChart = echarts.init(document.getElementById('main'));
+    // $.ajax({
+    //     method: 'get',
+    //     url: "/developer/total?name=apollo",	//这是后端接口的url
+    //     async: false,
+    //     success: function (res) {
+    //         obj = res.data;
+    //     },
+    // })
+    //
+    // $.ajax({
+    //     method: 'get',
+    //     url: "/developer/info?name=apollo",	//这是后端接口的url
+    //     async: false,
+    //     success: function (res) {
+    //         obj2 = res.data;
+    //     },
+    // })
+    obj = [[${total}]]
+    obj2 = [[${info}]]
+    option1 = {
+        title: {
+            text: 'Total Developers: ' + obj[0]
+        },
+        series: [
+            {
+                type: 'pie',
+                data: [
+                    {
+                        value: obj[1],
+                        name: obj2[0].split('-')[2] + ': ' + obj2[0].split('-')[1]
+                        // name: obj2[0].split('-')[2] + '(id: ' + obj2[0].split('-')[0] + '): ' + obj2[0].split('-')[1]
+                    },
+                    {
+                        value: obj[2],
+                        name: obj2[1].split('-')[2] + ': ' + obj2[1].split('-')[1]
+                    },
+                    {
+                        value: obj[3],
+                        name: obj2[2].split('-')[2] + ': ' + obj2[2].split('-')[1]
+                    },
+                    {
+                        value: obj[4],
+                        name: obj2[3].split('-')[2] + ': ' + obj2[3].split('-')[1]
+                    },
+                    {
+                        value: obj[5],
+                        name: obj2[4].split('-')[2] + ': ' + obj2[4].split('-')[1]
+                    },
+                    {
+                        value: obj[6],
+                        name: 'others: ' + obj[6]
+                    }
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option1);
+
+    console.log(obj)
+    console.log(obj2)
+
+    window.onresize = myChart.resize();
+</script>
+</body>
+</html>

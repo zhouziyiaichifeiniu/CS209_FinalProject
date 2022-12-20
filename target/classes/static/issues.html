@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Type</th>
+        <th>Average</th>
+        <th>Range</th>
+        <th>Variance</th>
+    </tr>
+    <tr>
+        <td id="0">var1</td>
+        <td id="1">var1</td>
+        <td id="2">var2</td>
+        <td id="3">var3</td>
+    </tr>
+
+</table>
+<div id="main" style="width: 600px;height:400px;"></div>
+<!--<div id="main2" style="width: 600px;height:400px;"></div>-->
+<script type="text/javascript">
+
+    var myChart = echarts.init(document.getElementById('main'));
+    $.ajax({
+        method: 'get',
+        url: "/issue/statuslist?name=apollo",	//这是后端接口的url
+        success: function (res) {
+            console.log(11111);
+            var obj = res.data;
+            console.log(res)
+            console.log(obj)
+            option1 = {
+                title: {
+                    text: 'issues status'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['total']
+                },
+                xAxis: {
+                    data: ['open', 'closed']
+                },
+                yAxis: {},
+                series: [
+                    {
+                        name: 'total',
+                        type: 'bar',
+                        data: [
+                            {value: obj[0], name: 'open'},
+                            {value: obj[1], name: 'close'}
+                        ]
+                    }
+                ]
+            };
+            myChart.setOption(option1);
+        },
+    })
+
+    // var myChart2 = echarts.init(document.getElementById('main2'));
+    $.ajax({
+        method: 'get',
+        url: "/issue/timevalues?name=apollo",	//这是后端接口的url
+        success: function (res) {
+            console.log(11111);
+            var obj2 = res.data;
+            console.log(res);
+            console.log(obj2);
+            $("#0").text('Value(h)');
+            $("#1").text(obj2[0]);
+            $("#2").text(obj2[1]);
+            $("#3").text(obj2[2]);
+            // option2 = {
+            //     title: {
+            //         text: 'issues data'
+            //     },
+            //     tooltip: {},
+            //     legend: {
+            //         data: ['num']
+            //     },
+            //     xAxis: {
+            //         data: ['average', 'range', 'variance']
+            //     },
+            //     yAxis: {},
+            //     series: [
+            //         {
+            //             name: 'total',
+            //             type: 'bar',
+            //             data: [
+            //                 {value: obj2[0], name: 'average'},
+            //                 {value: obj2[1], name: 'range'},
+            //                 {value: obj2[2], name: 'variance'}
+            //             ]
+            //         }
+            //     ]
+            // };
+            // myChart2.setOption(option2);
+        },
+    })
+
+    window.onresize = myChart.resize();
+    // window.onresize = myChart2.resize();
+</script>
+</body>
+</html>

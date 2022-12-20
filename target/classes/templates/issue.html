@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue!</title>
+</head>
+<!-- 新 Bootstrap5 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+<body th:style="'background-image: url(/img/3.svg)'">
+<style>
+    #h1 {
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+        font-weight: bold;
+        border: 1px;
+
+        opacity: 80%;
+    }
+
+    body {
+        background-size: 100%, 100%;
+    }
+
+
+    th {
+        font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        color: #4f6b72;
+        border-left: 1px solid #c1dad7;
+        border-right: 1px solid #c1dad7;
+        border-bottom: 1px solid #c1dad7;
+        border-top: 1px solid #c1dad7;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 5px 5px 5px 10px;
+    }
+
+    td {
+        border-right: 1px;
+        border-bottom: 1px solid #c1dad7;
+        background: #fff;
+        padding: 6px 6px 6px 12px;
+        color: #4f6b72;
+    }
+
+    #table1 {
+        text-align: center;
+        margin: 0 auto;
+        /*position: relative;*/
+        /*right: 700px;*/
+        /*top: 120px;*/
+    }
+
+    #main {
+        position: absolute;
+        left: 100px;
+        bottom: 100px;
+    }
+
+    #main2 {
+        position: absolute;
+        right: 100px;
+        bottom: 100px;
+    }
+
+    #pic {
+        right: 600px;
+        position: absolute;
+        bottom: -400px;
+    }
+</style>
+<div id="h1"><h1>Issue</h1>
+    <form th:action="@{/issue}" method="post">
+        <div>
+            <input type="submit" name="back" value="back" class="btn btn-danger">
+            <input type="submit" name="apollo" value="apollo" class="btn btn-info">
+            <input type="submit" name="httpie" value="httpie" class="btn btn-info">
+        </div>
+
+    </form>
+</div>
+<table border="1" id="table1">
+    <tr>
+        <th>Type</th>
+        <th>Average</th>
+        <th>Range</th>
+        <th>Variance</th>
+    </tr>
+    <!--    th:each="obj,list:${value}"-->
+    <tr>
+        <td id="0" th:text="'value(h)'">var1</td>
+        <td id="1" th:text="${v1}">var1</td>
+        <td id="2" th:text="${v2}">var2</td>
+        <td id="3" th:text="${v3}">var3</td>
+    </tr>
+</table>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+<div id="main2" style="width: 600px;height:400px;"></div>
+<img th:src="@{'img/'+${picture}}" id="pic">
+<script type="text/javascript" th:inline="javascript">
+
+    var myChart = echarts.init(document.getElementById('main'));
+    var obj = [[${status}]];
+    option1 = {
+        title: {
+            text: 'issues status'
+        },
+        tooltip: {},
+        legend: {
+            data: ['total']
+        },
+        xAxis: {
+            data: ['open', 'closed']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: 'total',
+                type: 'bar',
+                data: [
+                    {value: obj[0], name: 'open'},
+                    {value: obj[1], name: 'close'}
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option1);
+    // var obj2 = [[${value}]];
+    // $("#0").text('Value(h)');
+    // $("#1").text(obj2[0]);
+    // $("#2").text(obj2[1]);
+    // $("#3").text(obj2[2]);
+    window.onresize = myChart.resize();
+    // window.onresize = myChart2.resize();
+
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    var obj4 = [[${description}]];
+    option2 = {
+        title: {
+            text: 'Key Words of Description'
+        },
+        tooltip: {},
+        legend: {
+            data: ['total']
+        },
+        xAxis: {
+            data: ['1st', '2nd', '3rd', '4th', '5th']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: 'total',
+                type: 'bar',
+                data: [
+                    {value: obj4[0].split('=')[1], name: obj4[0].split('=')[0]},
+                    {value: obj4[1].split('=')[1], name: obj4[1].split('=')[0]},
+                    {value: obj4[2].split('=')[1], name: obj4[2].split('=')[0]},
+                    {value: obj4[3].split('=')[1], name: obj4[3].split('=')[0]},
+                    {value: obj4[4].split('=')[1], name: obj4[4].split('=')[0]}
+                ]
+            }
+        ]
+    };
+    myChart2.setOption(option2);
+    window.onresize = myChart2.resize();
+</script>
+</body>
+</html>

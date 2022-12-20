@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+
+    var obj;
+    var obj2;
+
+    var myChart = echarts.init(document.getElementById('main'));
+    $.ajax({
+        method: 'get',
+        url: "/developer/total?name=apollo",	//这是后端接口的url
+        async: false,
+        success: function (res) {
+            obj = res.data;
+        },
+    })
+
+    $.ajax({
+        method: 'get',
+        url: "/developer/info?name=apollo",	//这是后端接口的url
+        async: false,
+        success: function (res) {
+            obj2 = res.data;
+        },
+    })
+
+    option1 = {
+        title: {
+            text: 'Total Developers: ' + obj[0]
+        },
+        series: [
+            {
+                type: 'pie',
+                data: [
+                    {
+                        value: obj[1],
+                        name: obj2[0].split('-')[2] + ': ' + obj2[0].split('-')[1]
+                        // name: obj2[0].split('-')[2] + '(id: ' + obj2[0].split('-')[0] + '): ' + obj2[0].split('-')[1]
+                    },
+                    {
+                        value: obj[2],
+                        name: obj2[1].split('-')[2] + ': ' + obj2[1].split('-')[1]
+                    },
+                    {
+                        value: obj[3],
+                        name: obj2[2].split('-')[2] + ': ' + obj2[2].split('-')[1]
+                    },
+                    {
+                        value: obj[4],
+                        name: obj2[3].split('-')[2] + ': ' + obj2[3].split('-')[1]
+                    },
+                    {
+                        value: obj[5],
+                        name: obj2[4].split('-')[2] + ': ' + obj2[4].split('-')[1]
+                    },
+                    {
+                        value: obj[6],
+                        name: 'others: ' + obj[6]
+                    }
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option1);
+
+    console.log(obj)
+    console.log(obj2)
+
+    window.onresize = myChart.resize();
+</script>
+</body>
+</html>
