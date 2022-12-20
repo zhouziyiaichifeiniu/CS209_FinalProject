@@ -38,6 +38,7 @@ public class Developer {
   public void setRepoName(String repoName) {
     this.repoName = repoName;
   }
+
   public String getName() {
     return name;
   }

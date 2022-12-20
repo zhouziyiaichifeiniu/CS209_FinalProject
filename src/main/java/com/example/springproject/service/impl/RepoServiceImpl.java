@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RepoServiceImpl implements RepoService {
 
-    @Override
-    public Repo findInfo() {
-        return new Repo();
-    }
+  @Override
+  public Repo findInfo() {
+    return new Repo();
+  }
 }

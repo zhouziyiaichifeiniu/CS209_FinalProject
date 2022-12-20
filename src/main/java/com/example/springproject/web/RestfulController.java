@@ -18,32 +18,38 @@ import java.util.Optional;
 public class RestfulController {
   @Autowired
   private restfulDeveloper restfulDeveloper;
-@Autowired
- private restfulIssue restfulIssue;
-@Autowired
-private restfulRelease restfulRelease;
+  @Autowired
+  private restfulIssue restfulIssue;
+  @Autowired
+  private restfulRelease restfulRelease;
+
   @GetMapping("/developer/info")
   public List<Developer> getDeveloperInfo() {
     return restfulDeveloper.findAll();
   }
-@GetMapping("/developer/count")
-  public long getDeveloperCount(){
+
+  @GetMapping("/developer/count")
+  public long getDeveloperCount() {
     return restfulDeveloper.findCount();
-}
-@GetMapping("/issue/info")
-  public List<Issue> getIssueInfo(){
+  }
+
+  @GetMapping("/issue/info")
+  public List<Issue> getIssueInfo() {
     return restfulIssue.findAll();
-}
-@GetMapping("/issue/count")
-  public long getIssueCount(){
+  }
+
+  @GetMapping("/issue/count")
+  public long getIssueCount() {
     return restfulIssue.findCount();
-}
-@GetMapping("/release/info")
-  public List<Release> getReleaseInfo(){
+  }
+
+  @GetMapping("/release/info")
+  public List<Release> getReleaseInfo() {
     return restfulRelease.findAll();
-}
-@GetMapping("/release/count")
-  public long getRleaseCount(){
+  }
+
+  @GetMapping("/release/count")
+  public long getRleaseCount() {
     return restfulRelease.findCount();
-}
+  }
 }

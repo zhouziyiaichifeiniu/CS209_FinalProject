@@ -33,6 +33,7 @@ public class releaseController {
     this.name = "httpie";
     return "redirect:/release";
   }
+
   @GetMapping("/release")
   public String release(/*@RequestParam(name = "name", required = true) String name,*/ Model model) {
     model.addAttribute("total", releaseService.getTotal(name));

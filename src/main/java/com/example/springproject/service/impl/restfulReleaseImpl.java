@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class restfulReleaseImpl implements restfulRelease {
   @Autowired
   private releaseRepository releaseRepository;
+
   @Override
   public List<Release> findAll() {
     return releaseRepository.findAll();
