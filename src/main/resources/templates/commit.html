@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Commit</title>
+</head>
+<!-- 新 Bootstrap5 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+<body th:style="'background-image: url(/img/4.svg)'">
+<style>
+    #h1 {
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+        font-weight: bold;
+        border: 1px;
+
+        opacity: 80%;
+    }
+    #comm{
+        text-align: center;
+
+    }
+    body {
+        background-size: 100%, 100%;
+    }
+</style>
+<div id="h1"><h1>Commit</h1>
+    <form th:action="@{/commit}" method="post">
+        <div>
+            <input type="submit" value="back" class="btn btn-danger">
+        </div>
+    </form></div>
+<div class="row-fluid">
+    <form id="comm" th:action="@{/commit}" method="post">
+        <label>
+            <input type="text" id="input_start" name="startdate" >
+        </label>
+        <input type="submit" name="choose" value="choose!" class="btn btn-success" />
+    </form></div>
+</body>
+</html>
